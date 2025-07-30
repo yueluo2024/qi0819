@@ -10,7 +10,8 @@ const base = process.env.BASE || "/";
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.CI ? site : "http://localhost:4321",
+  site,
+  bas
   vite: {
     plugins: [
       FontaineTransform.vite({
