@@ -11,7 +11,7 @@ const base = process.env.BASE || "/";
 // https://astro.build/config
 export default defineConfig({
   site,
-  bas
+  base,
   vite: {
     plugins: [
       FontaineTransform.vite({
