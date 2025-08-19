@@ -24,11 +24,12 @@ let description = `
   />
 
   <body class="is-preload">
-    <div set:html={description}></div>
+    
     <div id="wrapper">
       <Header title={title} />
       <Footer title={title} description={description} />
       <Gallery />
+      <div set:html={description}></div>
     </div>
     <ExternalScripts />
   </body>
