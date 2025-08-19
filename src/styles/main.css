@@ -1676,3 +1676,7 @@ body.is-preload #main .thumb {
   margin-left: 0;       /* 清除默认左边距 */
   width: 100%;          /* 占满父容器宽度 */
 }
+.footer-left-title {
+  font-weight: bold;
+  color: #ffffff;
+}
