@@ -1678,21 +1678,3 @@ body.is-preload #main .thumb {
   width: 100%;          /* 占满父容器宽度 */
 }
 
-#header h7 {  
-  color: #8d8c8c;    /* 左下角的字体颜色 */
-  display: inline-block;
-  font-size: 1em;
-  line-height: 1;
-  margin: 0;
-  vertical-align: middle;
-  /*font-weight: bold;  新增的字体加粗设置 */
-}
-
-#header h7 a {
-  border: 0;
-  color: inherit;
-}
-
-#header h7 a:hover {
-  color: inherit !important;
-}
