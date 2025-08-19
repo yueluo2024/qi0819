@@ -1664,10 +1664,15 @@ body.is-preload #main .thumb {
 /* Footer */
 
 #footer .copyright {
-  color: #0000ff;
+  color: #a0a0a7;   /* 器材+摄影笔记的字体颜色 */
   font-size: 0.9em;
 }
 
 #footer .copyright a {
   color: inherit;
+}
+#footer .inner.split > div {
+  text-align: center;   /* 文字水平居中 */
+  margin-left: 0;       /* 清除默认左边距 */
+  width: 100%;          /* 占满父容器宽度 */
 }
