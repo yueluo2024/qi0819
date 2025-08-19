@@ -1287,7 +1287,7 @@ body.is-preload #header {
 }
 
 #header h1 {  
-  color: #8d8c8c;    /* 左下角的字体颜色 */
+  color: #c4c2c2;    /* 左下角的字体颜色 */
   display: inline-block;
   font-size: 0.75em;
   line-height: 1;
