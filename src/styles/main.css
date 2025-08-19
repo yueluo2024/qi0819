@@ -1286,13 +1286,14 @@ body.is-preload #header {
   transform: translateY(4em);
 }
 
-#header h1 {
-  color: #0f0fe0;
+#header h1 {  
+  color: #ffffff;    /* 左下角的字体颜色 */
   display: inline-block;
   font-size: 1em;
   line-height: 1;
   margin: 0;
   vertical-align: middle;
+  font-weight: bold; /* 新增的字体加粗设置 */
 }
 
 #header h1 a {
