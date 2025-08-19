@@ -2,127 +2,28 @@
 import { getImage, Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
-// 1. 定义图片元数据（路径 -> 描述文字的映射）
-const imageDescriptions = {
-  "/src/assets/0811.jpg": "清晨的山间薄雾，使用f/8光圈拍摄于日出后30分钟",
-  "/src/assets/11111.jpg": "城市夜景长曝光，展现车流轨迹的动感",
-  "/src/assets/QNC_5010x 拷贝.jpg": "海边日落，ISO 100保证画质纯净",
-  // 补充其他图片的描述...
-};
-
-// 2. 获取所有图片
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/*");
-const imagePaths = Object.keys(images).filter((path) => 
-  path.startsWith("/src/assets/")
-);
+const imagePaths = Object.keys(images).filter((imagePath) => {
+  return imagePath.startsWith("/src/assets/");
+});
 ---
 
-<!-- 3. 画廊主体 -->
 <div id="main">
   {
     imagePaths.map(async (imagePath) => {
-      const imageModule = await images[imagePath]();
+      const image = images[imagePath]()
       const optimizedImage = await getImage({
-        src: imageModule.default,
+        src: image,
         width: 1200,
-      });
-
-      // 获取当前图片的描述（默认空字符串）
-      const description = imageDescriptions[imagePath] || "摄影作品";
+      })
 
       return (
-        <article class="thumb" key={imagePath}>
-          {/* 点击触发模态框，传递图片路径和描述 */}
-          <a 
-            class="image" 
-            href="#" 
-            onClick={(e) => {
-              e.preventDefault();
-              // 显示模态框并设置内容
-              const modal = document.getElementById("image-modal");
-              const modalImg = document.getElementById("modal-image");
-              const modalDesc = document.getElementById("modal-description");
-              
-              if (modal && modalImg && modalDesc) {
-                modalImg.src = optimizedImage.src;
-                modalDesc.textContent = description;
-                modal.classList.add("active");
-                document.body.classList.add("modal-active");
-              }
-            }}
-          >
-            <Image 
-              src={imageModule.default} 
-              height="750" 
-              alt={description} 
-            />
+        <article class="thumb">
+          <a class="image" href={optimizedImage.src}>
+            <Image src={image} height="750" alt="Astro Multiverse" />
           </a>
         </article>
-      );
+      )
     })
   }
 </div>
-
-<!-- 4. 图片放大模态框 -->
-<div id="image-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" onClick={() => {
-      const modal = document.getElementById("image-modal");
-      if (modal) {
-        modal.classList.remove("active");
-        document.body.classList.remove("modal-active");
-      }
-    }}>&times;</span>
-    <img id="modal-image" class="modal-img" />
-    <div id="modal-description" class="modal-desc"></div>
-  </div>
-</div>
-
-<style>
-  /* 5. 模态框样式 */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    padding-top: 50px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-  }
-
-  .modal.active {
-    display: block;
-  }
-
-  .modal-content {
-    position: relative;
-    margin: auto;
-    padding: 0;
-    width: 80%;
-    max-width: 1200px;
-  }
-
-  .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .modal-img {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .modal-desc {
-    color: white;
-    text-align: center;
-    font-size: 1.2em;
-    padding: 10px 0 30px;
-  }
-</style>
